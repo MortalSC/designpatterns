@@ -62,3 +62,30 @@ func (fb FlyingBird) Fly() { /* 飞行 */ }
 
 type Ostrich struct{ Bird } // 无 Fly 方法
 ```
+
+> 具体看.go文件
+```go
+type Reader interface {
+    Read(p []byte) (n int, err error)
+}
+
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+
+type ReadWriter interface {
+    Reader
+    Writer
+}
+
+func Write(w Writer, p []byte) (int, error) {
+    return w.Write(p)
+}
+
+// 里氏替换：
+// ReadWriter(子类) 替换 Writer(父类) 
+func Write(rw ReadWriter, p []byte) (int, error) {
+    return rw.Write(p)
+}
+
+```
